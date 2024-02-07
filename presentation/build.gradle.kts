@@ -84,6 +84,9 @@ dependencies {
     // Coil Image Loading
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+    //Paging
+    implementation("androidx.paging:paging-compose:3.2.1")
+
     // Test
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("junit:junit:4.13.2")
