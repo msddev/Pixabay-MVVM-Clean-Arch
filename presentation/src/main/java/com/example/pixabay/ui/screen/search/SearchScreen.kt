@@ -10,9 +10,11 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,11 +22,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.pixabay.R
+import com.example.pixabay.model.ImagePresentationModel
+import com.example.pixabay.ui.commonComponent.EmptyView
 import com.example.pixabay.ui.commonComponent.error.RetryColumn
 import com.example.pixabay.ui.commonComponent.loading.LoadingColumn
 import com.example.pixabay.ui.screen.search.components.SearchResultItem
+import com.example.pixabay.ui.screen.search.components.SearchView
 import com.example.pixabay.ui.theme.DarkBlue
 import com.example.pixabay.ui.theme.PixabayTheme
 
@@ -32,9 +38,24 @@ import com.example.pixabay.ui.theme.PixabayTheme
 internal fun SearchScreen(
     searchViewModel: SearchViewModel = hiltViewModel(),
 ) {
-    val listState: LazyListState = rememberLazyListState()
-
     val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
+    val keyboardController = LocalSoftwareKeyboardController.current
+    keyboardController?.hide()
+
+    Scaffold(topBar = {
+        SearchView(onQueryChange = searchViewModel::onSearch, onBackClick = {
+
+        })
+    }) {
+        Box(modifier = Modifier.padding(it)) {
+            SearchResultView(imagesPaging = imagesPaging)
+        }
+    }
+}
+
+@Composable
+fun SearchResultView(imagesPaging: LazyPagingItems<ImagePresentationModel>) {
+    val listState: LazyListState = rememberLazyListState()
 
     LazyColumn(
         state = listState,
@@ -82,7 +103,6 @@ internal fun SearchScreen(
             }
 
             is LoadState.NotLoading -> {
-
             }
         }
     }
@@ -102,7 +122,9 @@ internal fun SearchScreen(
         }
 
         is LoadState.NotLoading -> {
-
+            if(imagesPaging.itemCount == 0){
+                EmptyView(message = stringResource(id = R.string.no_result))
+            }
         }
     }
 }
