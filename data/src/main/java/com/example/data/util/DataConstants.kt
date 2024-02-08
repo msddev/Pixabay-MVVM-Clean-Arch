@@ -3,7 +3,7 @@ package com.example.data.util
 import kotlin.time.Duration.Companion.seconds
 
 object DataConstants {
-    const val PAGE_SIZE = 50
+    const val PAGE_SIZE = 20
     const val FIRST_PAGE = 1
 }
 

@@ -83,7 +83,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
     // Coil Image Loading
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     //Paging
     implementation("androidx.paging:paging-compose:3.2.1")
