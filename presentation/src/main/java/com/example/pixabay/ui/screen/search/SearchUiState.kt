@@ -1,4 +1,4 @@
-package com.example.pixabay.ui.search
+package com.example.pixabay.ui.screen.search
 
 
 sealed class SearchUiState {

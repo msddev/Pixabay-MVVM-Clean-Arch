@@ -1,4 +1,4 @@
-package com.example.pixabay.ui.detail
+package com.example.pixabay.ui.screen.detail
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable

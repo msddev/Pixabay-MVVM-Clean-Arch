@@ -22,7 +22,7 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideTripRepository(
+    fun provideSearchImageRepository(
         imageApi: ImageApi,
         imageDao: ImageDao,
         remoteKeyDao: RemoteKeyDao,
