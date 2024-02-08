@@ -1,7 +1,7 @@
-package com.example.domain.model
+package com.example.pixabay.model
 
 
-data class ImageModel(
+data class ImagePresentationModel(
     val id: Int,
     val userId: Int,
     val previewImageURL: String,

@@ -2,10 +2,10 @@ package com.example.data.mapper
 
 import com.example.data.dataSource.local.entity.ImageEntity
 import com.example.data.dataSource.remote.dto.ImageDto
-import com.example.domain.model.ImageModel
+import com.example.domain.model.ImageDomainModel
 
-fun ImageEntity.toDomainImage(): ImageModel {
-    return ImageModel(
+fun ImageEntity.toDomainImage(): ImageDomainModel {
+    return ImageDomainModel(
         id = id,
         previewImageURL = previewImageURL,
         largeImageURL = largeImageURL,

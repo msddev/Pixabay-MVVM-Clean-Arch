@@ -11,7 +11,7 @@ import com.example.data.dataSource.remote.api.ImageApi
 import com.example.data.mapper.toDomainImage
 import com.example.data.mediator.ImageRemoteMediator
 import com.example.data.util.DataConstants
-import com.example.domain.model.ImageModel
+import com.example.domain.model.ImageDomainModel
 import com.example.domain.repository.SearchImageRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -23,7 +23,7 @@ class SearchImageRepositoryImpl(
     private val remoteKeyDao: RemoteKeyDao,
 ) : SearchImageRepository {
 
-    override fun searchImage(searchString: String): Flow<PagingData<ImageModel>> {
+    override fun searchImage(searchString: String): Flow<PagingData<ImageDomainModel>> {
         val pagingSourceFactory = { imageDao.queryImages(searchString) }
 
         return Pager(

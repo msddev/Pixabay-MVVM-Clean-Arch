@@ -1,14 +1,16 @@
 package com.example.pixabay.ui.screen.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.example.domain.usecase.SearchImageUseCase
+import com.example.pixabay.mapper.toImagePresentation
+import com.example.pixabay.model.ImagePresentationModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,16 +18,13 @@ class SearchViewModel @Inject constructor(
     private val searchImageUseCase: SearchImageUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SearchUiState>(SearchUiState.Loading)
-    val state = _state.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            searchImageUseCase(
-                payload = "fruits"
-            ).onEach { result ->
-                Log.d("TAG", "result: $result")
+    fun searchImages(searchString: String): Flow<PagingData<ImagePresentationModel>> {
+        return searchImageUseCase(
+            payload = searchString
+        ).map { pagingData ->
+            pagingData.map { imageDomainModel ->
+                imageDomainModel.toImagePresentation()
             }
-        }
+        }.cachedIn(viewModelScope)
     }
 }
