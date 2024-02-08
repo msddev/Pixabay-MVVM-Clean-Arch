@@ -4,6 +4,7 @@ package com.example.domain.model
 data class ImageModel(
     val id: Int,
     val userId: Int,
+    val previewImageURL: String,
     val largeImageURL: String,
     val likes: Int,
     val tags: String,
@@ -11,5 +12,5 @@ data class ImageModel(
     val user: String,
     val comments: Int,
     val downloads: Int,
-    var searchTerm: String
+    var searchString: String
 )
