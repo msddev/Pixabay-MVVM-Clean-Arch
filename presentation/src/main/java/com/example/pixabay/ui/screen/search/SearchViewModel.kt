@@ -10,26 +10,19 @@ import com.example.pixabay.mapper.toImagePresentation
 import com.example.pixabay.model.ImagePresentationModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchImageUseCase: SearchImageUseCase,
+    searchImageUseCase: SearchImageUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SearchUiState>(SearchUiState.Loading)
-    val state = _state.asStateFlow()
-
-    fun searchImages(searchString: String): Flow<PagingData<ImagePresentationModel>> {
-        return searchImageUseCase(
-            payload = searchString
-        ).map { pagingData ->
-            pagingData.map { imageDomainModel ->
-                imageDomainModel.toImagePresentation()
-            }
-        }.cachedIn(viewModelScope)
-    }
+    val imagesPaging: Flow<PagingData<ImagePresentationModel>> = searchImageUseCase(
+        payload = "fruits"
+    ).map { pagingData ->
+        pagingData.map { imageDomainModel ->
+            imageDomainModel.toImagePresentation()
+        }
+    }.cachedIn(viewModelScope)
 }
