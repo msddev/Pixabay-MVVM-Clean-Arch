@@ -25,6 +25,7 @@ object Dependencies {
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinxCoroutinesAndroid}"
     const val CoilCompose = "io.coil-kt:coil-compose:${Versions.CoilCompose}"
     const val PagingCompose = "androidx.paging:paging-compose:${Versions.PagingCompose}"
+    const val PagingCommonKtx = "androidx.paging:paging-common-ktx:${Versions.PagingCompose}"
     const val EspressoCore = "androidx.test.espresso:espresso-core:${Versions.EspressoCore}"
     const val Junit = "junit:junit:${Versions.Junit}"
     const val ExtJunit = "androidx.test.ext:junit:${Versions.ExtJunit}"
@@ -41,6 +42,17 @@ object Dependencies {
     const val Turbine = "app.cash.turbine:turbine:${Versions.Turbine}"
     const val Truth = "com.google.truth:truth:${Versions.Truth}"
     const val MockWebserver = "com.squareup.okhttp3:mockwebserver:${Versions.MockWebserver}"
+    const val Retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.Retrofit2}"
+    const val Retrofit2ConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.Retrofit2}"
+    const val Okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.Okhttp3}"
+    const val Okhttp3LoggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.Okhttp3}"
+    const val KotlinxSerializationJson =
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KotlinxSerializationJson}"
+    const val RoomRuntime = "androidx.room:room-runtime:${Versions.RoomRuntime}"
+    const val RoomCompiler = "androidx.room:room-compiler:${Versions.RoomRuntime}"
+    const val RoomKtx = "androidx.room:room-ktx:${Versions.RoomRuntime}"
+    const val RoomPaging = "androidx.room:room-paging:${Versions.RoomRuntime}"
 }
 
 object Versions {
@@ -70,5 +82,9 @@ object Versions {
     const val Turbine = "1.0.0"
     const val Truth = "1.1.4"
     const val MockWebserver = "4.11.0"
+    const val Retrofit2 = "2.9.0"
+    const val Okhttp3 = "5.0.0-alpha.5"
+    const val KotlinxSerializationJson = "1.6.0"
+    const val RoomRuntime = "2.6.1"
 }
 

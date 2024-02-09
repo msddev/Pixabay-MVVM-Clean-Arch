@@ -10,6 +10,5 @@ object AppVersion {
 }
 
 object BuildOptions {
-    const val JvmTargetVersion = "17"
     const val KotlinCompilerExtensionVersion = "1.5.3"
 }

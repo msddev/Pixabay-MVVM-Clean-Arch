@@ -7,10 +7,10 @@ plugins {
 
 android {
     namespace = "com.example.data"
-    compileSdk = 34
+    compileSdk = BuildVersion.CompileSdkVersion
 
     defaultConfig {
-        minSdk = 24
+        minSdk = BuildVersion.MinSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,7 +32,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     buildFeatures {
@@ -44,22 +44,22 @@ dependencies {
     implementation(project(":domain"))
 
     // Networking
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.5")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation(Dependencies.Retrofit2)
+    implementation(Dependencies.Retrofit2ConverterGson)
+    implementation(Dependencies.Okhttp3)
+    implementation(Dependencies.Okhttp3LoggingInterceptor)
+    implementation(Dependencies.KotlinxSerializationJson)
 
     // Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    implementation("androidx.room:room-paging:2.6.1")
+    implementation(Dependencies.RoomRuntime)
+    ksp(Dependencies.RoomCompiler)
+    implementation(Dependencies.RoomKtx)
+    implementation(Dependencies.RoomPaging)
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    ksp("com.google.dagger:hilt-compiler:2.48")
+    implementation(Dependencies.HiltAndroid)
+    ksp(Dependencies.HiltCompiler)
 
     // Test
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(Dependencies.Junit)
 }
