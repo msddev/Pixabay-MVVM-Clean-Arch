@@ -1,5 +1,6 @@
 package com.example.pixabay.ui.screen.search.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -7,8 +8,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -21,12 +23,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.PresentationConstants
 
 @Composable
-fun SearchView(
+fun SearchBoxView(
     onQueryChange: (query: String) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -41,24 +46,32 @@ fun SearchView(
             },
             value = query,
             onValueChange = {
-                query = it
-            }, leadingIcon = {
-                IconButton(onClick = {
-                    onBackClick()
-                }) {
+                if(it.length <=20) {
+                    query = it
+                }
+            },
+            leadingIcon = {
+                IconButton(onClick = onBackClick) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        imageVector = Icons.Filled.Search,
                         contentDescription = null
                     )
                 }
             },
             trailingIcon = {
-                if (query.isNotEmpty()) {
-                    IconButton(onClick = {
-                        query = ""
-                    }) {
-                        Icon(imageVector = Icons.Default.Close, contentDescription = null)
+                IconButton(
+                    onClick = {
+                        if (query.isEmpty()) {
+                            onBackClick.invoke()
+                        } else {
+                            query = ""
+                        }
                     }
+                ) {
+                    Icon(
+                        imageVector = getIcon(query),
+                        contentDescription = null
+                    )
                 }
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
@@ -75,6 +88,27 @@ fun SearchView(
                 selectionColors = TextSelectionColors(colors.onPrimary, colors.onSecondary),
             )
 
+        )
+    }
+}
+
+@Composable
+private fun getIcon(query: String): ImageVector {
+    return if (query.isEmpty()) {
+        Icons.AutoMirrored.Filled.ArrowForward
+    } else {
+        Icons.Filled.Clear
+    }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ScreenPreview() {
+    PixabayTheme {
+        SearchBoxView(
+            onQueryChange = {},
+            onBackClick = {}
         )
     }
 }

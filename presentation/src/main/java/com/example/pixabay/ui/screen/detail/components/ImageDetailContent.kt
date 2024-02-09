@@ -58,7 +58,8 @@ internal fun ImageDetailContent(
         FloatingActionButton(
             modifier = Modifier
                 .padding(16.dp)
-                .size(size = 42.dp),
+                .size(size = 42.dp)
+                .align(Alignment.TopStart),
             onClick = onBackClick,
             backgroundColor = MaterialTheme.colors.background,
             shape = CircleShape,
@@ -165,7 +166,6 @@ internal fun ImageDetailContent(
         }
     }
 }
-
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

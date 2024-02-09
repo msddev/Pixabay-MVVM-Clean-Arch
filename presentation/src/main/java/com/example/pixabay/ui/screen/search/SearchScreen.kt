@@ -1,6 +1,6 @@
 package com.example.pixabay.ui.screen.search
 
-import android.content.res.Configuration
+import android.app.Activity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,10 +14,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,26 +29,28 @@ import com.example.pixabay.model.ImagePresentationModel
 import com.example.pixabay.ui.commonComponent.EmptyView
 import com.example.pixabay.ui.commonComponent.error.RetryColumn
 import com.example.pixabay.ui.commonComponent.loading.LoadingColumn
+import com.example.pixabay.ui.screen.search.components.SearchBoxView
 import com.example.pixabay.ui.screen.search.components.SearchResultItem
-import com.example.pixabay.ui.screen.search.components.SearchView
 import com.example.pixabay.ui.theme.DarkBlue
-import com.example.pixabay.ui.theme.PixabayTheme
 
 @Composable
 internal fun SearchScreen(
     searchViewModel: SearchViewModel = hiltViewModel(),
     navigateToDetailScreen: (String) -> Unit,
 ) {
+    val activity = (LocalContext.current as? Activity)
+
     val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
+
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
 
     Scaffold(
         topBar = {
-            SearchView(
+            SearchBoxView(
                 onQueryChange = searchViewModel::onSearch,
                 onBackClick = {
-
+                    activity?.finish()
                 }
             )
         }
