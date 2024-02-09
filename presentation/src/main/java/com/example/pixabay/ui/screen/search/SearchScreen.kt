@@ -37,6 +37,7 @@ import com.example.pixabay.ui.theme.PixabayTheme
 @Composable
 internal fun SearchScreen(
     searchViewModel: SearchViewModel = hiltViewModel(),
+    navigateToDetailScreen: (String) -> Unit,
 ) {
     val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -122,7 +123,7 @@ fun SearchResultView(imagesPaging: LazyPagingItems<ImagePresentationModel>) {
         }
 
         is LoadState.NotLoading -> {
-            if(imagesPaging.itemCount == 0){
+            if (imagesPaging.itemCount == 0) {
                 EmptyView(message = stringResource(id = R.string.no_result))
             }
         }
@@ -134,6 +135,10 @@ fun SearchResultView(imagesPaging: LazyPagingItems<ImagePresentationModel>) {
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchScreen()
+        SearchScreen(
+            navigateToDetailScreen = {
+
+            }
+        )
     }
 }
