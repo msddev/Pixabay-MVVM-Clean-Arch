@@ -6,5 +6,6 @@
     <string name="no_result">Your search didn\'t bring up any result</string>
     <string name="error_loading_images">There was an error loading the images,\nplease check your internet and try again</string>
     <string name="error_paging_images">There is a problem!</string>
+    <string name="fetching_image_detail">Fetching Movie Detail…</string>
 
 </resources>

@@ -15,9 +15,9 @@ interface ImageDao {
     @Query("SELECT * FROM image_table WHERE searchString LIKE :query")
     fun queryImages(query: String): PagingSource<Int, ImageEntity>
 
+    @Query("SELECT * FROM image_table WHERE id =:id LIMIT 1")
+    suspend fun getImagesById(id: String): ImageEntity
+
     @Query("DELETE FROM image_table")
     suspend fun clearAll()
-
-    @Query("SELECT * FROM image_table")
-    suspend fun getAll(): List<ImageEntity>
 }

@@ -43,19 +43,34 @@ internal fun SearchScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
 
-    Scaffold(topBar = {
-        SearchView(onQueryChange = searchViewModel::onSearch, onBackClick = {
+    Scaffold(
+        topBar = {
+            SearchView(
+                onQueryChange = searchViewModel::onSearch,
+                onBackClick = {
 
-        })
-    }) {
-        Box(modifier = Modifier.padding(it)) {
-            SearchResultView(imagesPaging = imagesPaging)
+                }
+            )
+        }
+    ) {
+        Box(
+            modifier = Modifier.padding(it)
+        ) {
+            SearchResultView(
+                imagesPaging = imagesPaging,
+                onItemClick = { imageId ->
+                    navigateToDetailScreen.invoke(imageId)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun SearchResultView(imagesPaging: LazyPagingItems<ImagePresentationModel>) {
+fun SearchResultView(
+    imagesPaging: LazyPagingItems<ImagePresentationModel>,
+    onItemClick: (String) -> Unit,
+) {
     val listState: LazyListState = rememberLazyListState()
 
     LazyColumn(
@@ -65,15 +80,16 @@ fun SearchResultView(imagesPaging: LazyPagingItems<ImagePresentationModel>) {
         items(
             count = imagesPaging.itemCount,
         ) { index ->
-            val item = imagesPaging[index]
-            SearchResultItem(
-                thumbnail = item?.previewImageURL.orEmpty(),
-                username = item?.user.orEmpty(),
-                tags = item?.tags.orEmpty(),
-                onItemClick = {
-
-                }
-            )
+            imagesPaging[index]?.let { item ->
+                SearchResultItem(
+                    thumbnail = item.previewImageURL,
+                    username = item.user,
+                    tags = item.tags,
+                    onItemClick = {
+                        onItemClick.invoke(item.id.toString())
+                    }
+                )
+            }
         }
 
         when (imagesPaging.loadState.append) {
