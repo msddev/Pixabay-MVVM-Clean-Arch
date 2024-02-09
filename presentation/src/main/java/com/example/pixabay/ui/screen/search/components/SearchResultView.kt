@@ -40,7 +40,7 @@ fun SearchResultView(
     onItemClick: (item: String) -> Unit,
 ) {
     val listState: LazyListState = rememberLazyListState()
-    val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.01f to Color.Red)
+    val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.01f to Color.White)
 
     LazyColumn(
         modifier = Modifier
@@ -107,7 +107,10 @@ fun SearchResultView(
         }
 
         is LoadState.NotLoading -> {
-            if (imagesPaging.itemCount == 0) {
+            if (
+                imagesPaging.itemCount == 0 &&
+                imagesPaging.loadState.source.refresh != LoadState.Loading
+            ) {
                 EmptyView(message = stringResource(id = R.string.no_result))
             }
         }

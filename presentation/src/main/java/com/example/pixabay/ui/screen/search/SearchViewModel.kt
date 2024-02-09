@@ -30,14 +30,6 @@ class SearchViewModel @Inject constructor(
         savedStateHandle[PresentationConstants.KEY_SEARCH_QUERY] = query
     }
 
-    /*val imagesPaging: Flow<PagingData<ImagePresentationModel>> = searchImageUseCase(
-        payload = "fruits"
-    ).map { pagingData ->
-        pagingData.map { imageDomainModel ->
-            imageDomainModel.toImagePresentation()
-        }
-    }.cachedIn(viewModelScope)*/
-
     var imagesPaging: Flow<PagingData<ImagePresentationModel>> =
         savedStateHandle.getStateFlow(
             PresentationConstants.KEY_SEARCH_QUERY,
