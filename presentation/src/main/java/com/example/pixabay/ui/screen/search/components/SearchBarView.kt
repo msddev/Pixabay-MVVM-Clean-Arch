@@ -1,10 +1,10 @@
 package com.example.pixabay.ui.screen.search.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -35,7 +34,7 @@ import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.PresentationConstants
 
 @Composable
-fun SearchBarView(
+internal fun SearchBarView(
     onQueryChange: (query: String) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -46,8 +45,8 @@ fun SearchBarView(
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.onPrimary)
                 .padding(8.dp),
+            shape = CircleShape,
             placeholder = {
                 Text(text = "Search")
             },

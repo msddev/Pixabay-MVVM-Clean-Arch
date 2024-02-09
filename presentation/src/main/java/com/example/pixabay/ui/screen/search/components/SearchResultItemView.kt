@@ -25,9 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.GreenLight
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.CoilImage
+import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.ui.theme.PixabayTheme
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)

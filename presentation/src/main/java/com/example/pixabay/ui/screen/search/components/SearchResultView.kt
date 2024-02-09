@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -117,7 +118,17 @@ fun SearchResultView(
 private fun ScreenPreview() {
     PixabayTheme {
         SearchResultView(
-            imagesPaging = flowOf(PagingData.from(listOf(ImagePresentationModel()))).collectAsLazyPagingItems(),
+            imagesPaging = flowOf(
+                PagingData.from(
+                    listOf(ImagePresentationModel()),
+                    sourceLoadStates =
+                    LoadStates(
+                        refresh = LoadState.NotLoading(true),
+                        append = LoadState.NotLoading(true),
+                        prepend = LoadState.NotLoading(true),
+                    )
+                )
+            ).collectAsLazyPagingItems(),
             onItemClick = {}
         )
     }

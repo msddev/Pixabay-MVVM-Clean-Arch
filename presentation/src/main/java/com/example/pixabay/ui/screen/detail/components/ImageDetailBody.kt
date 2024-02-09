@@ -32,7 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.GreenLight
+import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.R
 import com.example.pixabay.model.ImagePresentationModel
 import com.example.pixabay.ui.commonComponent.CoilImage
@@ -47,6 +47,7 @@ internal fun ImageDetailBody(
         CoilImage(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .align(Alignment.Center),
             imageUrl = imageDetail.largeImageURL,
             contentScale = ContentScale.Crop

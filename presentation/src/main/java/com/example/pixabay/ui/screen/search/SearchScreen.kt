@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.pixabay.ui.screen.search.components.SearchBarView
+import com.example.pixabay.ui.screen.search.components.SearchResultView
 
 @Composable
 internal fun SearchScreen(
@@ -21,7 +23,7 @@ internal fun SearchScreen(
 ) {
     val activity = (LocalContext.current as? Activity)
 
-    //val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
+    val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
 
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
@@ -42,12 +44,12 @@ internal fun SearchScreen(
         Box(
             modifier = Modifier.padding(it)
         ) {
-            /*SearchResultView(
+            SearchResultView(
                 imagesPaging = imagesPaging,
                 onItemClick = { imageId ->
                     navigateToDetailScreen.invoke(imageId)
                 }
-            )*/
+            )
         }
     }
 }
