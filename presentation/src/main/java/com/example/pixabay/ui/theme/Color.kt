@@ -15,3 +15,5 @@ val Gold55 = Color(0XFFb09f8b)
 val LightBlue = Color(0XFFECF1F4)
 val Gray75 = Color(0xffd8e6ff)
 val LightPink = Color(0xFFFFFBFE)
+
+val GreenLight = Color(0xFF58F505)

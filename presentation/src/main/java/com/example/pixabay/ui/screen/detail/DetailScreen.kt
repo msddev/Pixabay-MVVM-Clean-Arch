@@ -1,16 +1,13 @@
 package com.example.pixabay.ui.screen.detail
 
-import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.error.RetryColumn
 import com.example.pixabay.ui.commonComponent.loading.LoadingColumn
 import com.example.pixabay.ui.screen.detail.components.ImageDetailContent
-import com.example.pixabay.ui.theme.PixabayTheme
 
 @Composable
 internal fun DetailScreen(
@@ -42,17 +39,5 @@ internal fun DetailScreen(
                 }
             )
         }
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun ScreenPreview() {
-    PixabayTheme {
-        DetailScreen(
-            imageId = "1",
-            onBackClick = {}
-        )
     }
 }
