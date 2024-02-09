@@ -39,7 +39,7 @@ import kotlinx.coroutines.flow.flowOf
 @Composable
 fun SearchResultView(
     imagesPaging: LazyPagingItems<ImagePresentationModel>,
-    onItemClick: (String) -> Unit,
+    onItemClick: (item: String) -> Unit,
 ) {
     val listState: LazyListState = rememberLazyListState()
     val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.01f to Color.Red)

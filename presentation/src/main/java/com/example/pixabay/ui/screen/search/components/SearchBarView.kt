@@ -35,7 +35,7 @@ import com.example.pixabay.util.PresentationConstants
 
 @Composable
 internal fun SearchBarView(
-    onQueryChange: (query: String) -> Unit,
+    onSearchClick: (query: String) -> Unit,
     onBackClick: () -> Unit
 ) {
     var query by remember { mutableStateOf(PresentationConstants.DEFAULT_SEARCH_QUERY) }
@@ -83,7 +83,7 @@ internal fun SearchBarView(
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = {
                 keyboardController?.hide()
-                onQueryChange(query)
+                onSearchClick.invoke(query)
             }),
             singleLine = true,
             maxLines = 1,
@@ -113,7 +113,7 @@ private fun getIcon(query: String): ImageVector {
 private fun ScreenPreview() {
     PixabayTheme {
         SearchBarView(
-            onQueryChange = {},
+            onSearchClick = {},
             onBackClick = {}
         )
     }

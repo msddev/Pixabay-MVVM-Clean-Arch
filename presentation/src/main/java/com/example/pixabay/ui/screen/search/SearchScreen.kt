@@ -8,11 +8,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.pixabay.ui.screen.search.components.DetailAlertDialog
 import com.example.pixabay.ui.screen.search.components.SearchBarView
 import com.example.pixabay.ui.screen.search.components.SearchResultView
 
@@ -25,6 +30,9 @@ internal fun SearchScreen(
 
     val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
 
+    var showDetailAlertDialog by remember { mutableStateOf(false) }
+    var imageId by remember { mutableStateOf("") }
+
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
 
@@ -34,7 +42,7 @@ internal fun SearchScreen(
             .background(MaterialTheme.colorScheme.background),
         topBar = {
             SearchBarView(
-                onQueryChange = searchViewModel::onSearch,
+                onSearchClick = searchViewModel::onSearch,
                 onBackClick = {
                     activity?.finish()
                 }
@@ -42,14 +50,26 @@ internal fun SearchScreen(
         }
     ) {
         Box(
-            modifier = Modifier.padding(it)
+            modifier = Modifier.fillMaxSize().padding(it)
         ) {
             SearchResultView(
                 imagesPaging = imagesPaging,
-                onItemClick = { imageId ->
-                    navigateToDetailScreen.invoke(imageId)
+                onItemClick = { id ->
+                    imageId = id
+                    showDetailAlertDialog = true
                 }
             )
         }
     }
+
+    DetailAlertDialog(
+        show = showDetailAlertDialog,
+        onDismissRequest = {
+            showDetailAlertDialog = false
+        },
+        onConfirmation = {
+            showDetailAlertDialog = false
+            navigateToDetailScreen.invoke(imageId)
+        }
+    )
 }
