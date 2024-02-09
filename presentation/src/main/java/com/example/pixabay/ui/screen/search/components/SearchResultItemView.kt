@@ -55,7 +55,7 @@ internal fun SearchResultItemView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.4f))
+                    .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
                     .padding(dimensionResource(id = R.dimen.padding_x_small))
                     .align(Alignment.BottomCenter),
             ) {

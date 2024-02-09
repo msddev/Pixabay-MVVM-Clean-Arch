@@ -72,7 +72,7 @@ internal fun ImageDetailBody(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.3f),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
                     shape = RoundedCornerShape(topStartPercent = 15, topEndPercent = 15)
                 )
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
