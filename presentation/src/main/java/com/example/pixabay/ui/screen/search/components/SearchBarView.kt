@@ -1,8 +1,10 @@
 package com.example.pixabay.ui.screen.search.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
@@ -13,6 +15,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -27,11 +30,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.PresentationConstants
 
 @Composable
-fun SearchBoxView(
+fun SearchBarView(
     onQueryChange: (query: String) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -40,13 +44,16 @@ fun SearchBoxView(
 
     Column {
         TextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.onPrimary)
+                .padding(8.dp),
             placeholder = {
                 Text(text = "Search")
             },
             value = query,
             onValueChange = {
-                if(it.length <=20) {
+                if (it.length <= 20) {
                     query = it
                 }
             },
@@ -82,7 +89,7 @@ fun SearchBoxView(
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.colors(
-                cursorColor = colors.onPrimary,
+                cursorColor = Color.Gray,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 selectionColors = TextSelectionColors(colors.onPrimary, colors.onSecondary),
@@ -106,7 +113,7 @@ private fun getIcon(query: String): ImageVector {
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchBoxView(
+        SearchBarView(
             onQueryChange = {},
             onBackClick = {}
         )

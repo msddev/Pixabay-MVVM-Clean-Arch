@@ -7,7 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.error.RetryColumn
 import com.example.pixabay.ui.commonComponent.loading.LoadingColumn
-import com.example.pixabay.ui.screen.detail.components.ImageDetailContent
+import com.example.pixabay.ui.screen.detail.components.ImageDetailBody
 
 @Composable
 internal fun DetailScreen(
@@ -24,7 +24,7 @@ internal fun DetailScreen(
 
         is DetailUiState.Success -> {
             uiState.data?.let { image ->
-                ImageDetailContent(
+                ImageDetailBody(
                     imageDetail = image,
                     onBackClick = onBackClick
                 )

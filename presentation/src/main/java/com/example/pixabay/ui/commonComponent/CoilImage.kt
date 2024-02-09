@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +21,6 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.pixabay.R
-import com.example.pixabay.ui.theme.DarkBlue
 import com.example.pixabay.ui.theme.PixabayTheme
 
 @Composable
@@ -46,7 +46,7 @@ fun CoilImage(
                         .align(Alignment.Center),
                     painter = painterResource(id = R.drawable.baseline_broken_image_24),
                     contentDescription = stringResource(id = R.string.app_name),
-                    tint = DarkBlue
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -54,7 +54,7 @@ fun CoilImage(
                 DotsLoading(
                     modifier = Modifier.align(Alignment.Center),
                     dotSize = 12.dp,
-                    dotColor = DarkBlue
+                    dotColor = MaterialTheme.colorScheme.primary
                 )
             }
 

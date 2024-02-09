@@ -1,5 +1,6 @@
 package com.example.pixabay.ui.screen.search.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
@@ -14,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,17 +25,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.GreenLight
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.CoilImage
-import com.example.pixabay.ui.theme.DarkBlue
-import com.example.pixabay.ui.theme.Gray55
-import com.example.pixabay.ui.theme.GreenLight
-import com.example.pixabay.ui.theme.LightBlue
 import com.example.pixabay.ui.theme.PixabayTheme
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
-internal fun SearchResultItem(
+internal fun SearchResultItemView(
     thumbnail: String,
     username: String,
     tags: String,
@@ -47,7 +46,6 @@ internal fun SearchResultItem(
                 vertical = dimensionResource(id = R.dimen.padding_x_small),
                 horizontal = dimensionResource(id = R.dimen.padding_small)
             ),
-        backgroundColor = Gray55,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)),
         elevation = 6.dp,
         onClick = onItemClick,
@@ -61,7 +59,7 @@ internal fun SearchResultItem(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(DarkBlue.copy(alpha = 0.4f))
+                    .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.4f))
                     .padding(dimensionResource(id = R.dimen.padding_x_small))
                     .align(Alignment.BottomCenter),
             ) {
@@ -71,7 +69,7 @@ internal fun SearchResultItem(
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.surface
                 )
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_2x_small)))
                 Text(
@@ -92,11 +90,12 @@ internal fun SearchResultItem(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchResultItem(
+        SearchResultItemView(
             thumbnail = "",
             username = "Masoud",
             tags = "Test, Test",

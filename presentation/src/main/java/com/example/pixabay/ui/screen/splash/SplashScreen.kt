@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,11 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pixabay.R
-import com.example.pixabay.ui.theme.LightBlue
 import com.example.pixabay.ui.theme.PixabayTheme
-import com.example.pixabay.ui.theme.Purple40
 import com.example.pixabay.util.textSp
-import kotlinx.coroutines.delay
 
 @Composable
 internal fun SplashScreen(
@@ -30,7 +28,7 @@ internal fun SplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = LightBlue),
+            .background(MaterialTheme.colorScheme.background),
     ) {
         Text(
             modifier = Modifier
@@ -42,11 +40,11 @@ internal fun SplashScreen(
             fontWeight = FontWeight.Bold,
             maxLines = 1,
             fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
-            color = Purple40,
+            color = MaterialTheme.colorScheme.surface,
         )
     }
     LaunchedEffect(Unit) {
-        delay(2000)
+        //delay(2000)
         navigateToSearchScreen()
     }
 }

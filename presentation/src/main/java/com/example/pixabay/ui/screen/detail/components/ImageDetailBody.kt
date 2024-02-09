@@ -17,15 +17,14 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -33,20 +32,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.GreenLight
 import com.example.pixabay.R
 import com.example.pixabay.model.ImagePresentationModel
 import com.example.pixabay.ui.commonComponent.CoilImage
-import com.example.pixabay.ui.theme.DarkBlue
-import com.example.pixabay.ui.theme.GreenLight
-import com.example.pixabay.ui.theme.LightBlue
 import com.example.pixabay.ui.theme.PixabayTheme
 
 @Composable
-internal fun ImageDetailContent(
+internal fun ImageDetailBody(
     imageDetail: ImagePresentationModel,
     onBackClick: () -> Unit,
 ) {
-    Box(modifier = Modifier.fillMaxSize().background(LightBlue)) {
+    Box(modifier = Modifier.fillMaxSize()) {
         CoilImage(
             modifier = Modifier
                 .fillMaxSize()
@@ -61,13 +58,13 @@ internal fun ImageDetailContent(
                 .size(size = 42.dp)
                 .align(Alignment.TopStart),
             onClick = onBackClick,
-            backgroundColor = MaterialTheme.colors.background,
+            backgroundColor = MaterialTheme.colorScheme.background,
             shape = CircleShape,
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = null,
-                tint = Color.Black,
+                tint = MaterialTheme.colorScheme.onBackground,
             )
         }
 
@@ -75,7 +72,7 @@ internal fun ImageDetailContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = DarkBlue.copy(alpha = 0.3f),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.3f),
                     shape = RoundedCornerShape(topStartPercent = 15, topEndPercent = 15)
                 )
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
@@ -92,7 +89,7 @@ internal fun ImageDetailContent(
                 Icon(
                     modifier = Modifier.size(24.dp),
                     painter = painterResource(id = R.drawable.baseline_favorite_24),
-                    tint = Color.White,
+                    tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
                 )
                 Text(
@@ -103,7 +100,7 @@ internal fun ImageDetailContent(
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.surface
                 )
 
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_standard)))
@@ -111,7 +108,7 @@ internal fun ImageDetailContent(
                 Icon(
                     modifier = Modifier.size(24.dp),
                     painter = painterResource(id = R.drawable.baseline_comment_24),
-                    tint = Color.White,
+                    tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
                 )
                 Text(
@@ -122,7 +119,7 @@ internal fun ImageDetailContent(
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.surface
                 )
 
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_standard)))
@@ -130,7 +127,7 @@ internal fun ImageDetailContent(
                 Icon(
                     modifier = Modifier.size(24.dp),
                     painter = painterResource(id = R.drawable.baseline_cloud_download_24),
-                    tint = Color.White,
+                    tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
                 )
                 Text(
@@ -141,7 +138,7 @@ internal fun ImageDetailContent(
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.surface
                 )
             }
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
@@ -151,7 +148,7 @@ internal fun ImageDetailContent(
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = LightBlue
+                color = MaterialTheme.colorScheme.surface
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_x_small)))
             Text(
@@ -172,7 +169,7 @@ internal fun ImageDetailContent(
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        ImageDetailContent(
+        ImageDetailBody(
             imageDetail = ImagePresentationModel(
                 user = "Masoud",
                 tags = "Test, Test",

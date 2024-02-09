@@ -27,7 +27,7 @@ class SearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     fun onSearch(query: String) {
-        savedStateHandle[KEY_SEARCH_QUERY] = query
+        savedStateHandle[PresentationConstants.KEY_SEARCH_QUERY] = query
     }
 
     /*val imagesPaging: Flow<PagingData<ImagePresentationModel>> = searchImageUseCase(
@@ -39,7 +39,10 @@ class SearchViewModel @Inject constructor(
     }.cachedIn(viewModelScope)*/
 
     var imagesPaging: Flow<PagingData<ImagePresentationModel>> =
-        savedStateHandle.getStateFlow(KEY_SEARCH_QUERY, PresentationConstants.DEFAULT_SEARCH_QUERY)
+        savedStateHandle.getStateFlow(
+            PresentationConstants.KEY_SEARCH_QUERY,
+            PresentationConstants.DEFAULT_SEARCH_QUERY
+        )
             .debounce(500)
             .filter { it.isNotEmpty() }
             .flatMapLatest { query ->
@@ -50,9 +53,6 @@ class SearchViewModel @Inject constructor(
                         imageDomainModel.toImagePresentation()
                     }
                 }
-            }.cachedIn(viewModelScope)
-
-    companion object {
-        const val KEY_SEARCH_QUERY = "search_query"
-    }
+            }
+            .cachedIn(viewModelScope)
 }
