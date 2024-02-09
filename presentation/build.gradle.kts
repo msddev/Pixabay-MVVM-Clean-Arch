@@ -7,14 +7,14 @@ plugins {
 
 android {
     namespace = "com.example.pixabay"
-    compileSdk = 34
+    compileSdk = BuildVersion.CompileSdkVersion
 
     defaultConfig {
         applicationId = "com.example.pixabay"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = BuildVersion.MinSdkVersion
+        targetSdk = BuildVersion.TargetSdkVersion
+        versionCode = AppVersion.VersionCode
+        versionName = AppVersion.VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -36,14 +36,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = BuildOptions.JvmTargetVersion
     }
     buildFeatures {
         compose = true
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = BuildOptions.KotlinCompilerExtensionVersion
     }
     packaging {
         resources {
@@ -57,51 +57,52 @@ dependencies {
     implementation(project(":domain"))
 
     // Compose
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.compose.material3:material3:1.1.2")
-    implementation("androidx.compose.material:material:1.6.0")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation(Dependencies.ActivityCompose)
+    implementation(Dependencies.ComposeMaterial3)
+    implementation(Dependencies.ComposeMaterial)
+    implementation(Dependencies.ComposeUi)
+    implementation(Dependencies.ComposeUiGraphics)
+    implementation(Dependencies.ComposeUiToolingPreview)
+    implementation(Dependencies.ComposeUiTooling)
+    implementation(platform(Dependencies.ComposeBom))
+    androidTestImplementation(platform(Dependencies.ComposeBom))
+    implementation(Dependencies.ComposeRuntimeLivedata)
+    implementation(Dependencies.LifecycleViewModelCompose)
+    implementation(Dependencies.LifecycleRuntimeCompose)
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.6")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation(Dependencies.NavigationCompose)
+    implementation(Dependencies.HiltNavigationCompose)
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    ksp("com.google.dagger:hilt-compiler:2.48")
+
+    implementation(Dependencies.HiltAndroid)
+    ksp(Dependencies.HiltCompiler)
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation(Dependencies.KotlinxCoroutinesAndroid)
+    implementation(Dependencies.KotlinxCoroutinesCore)
 
     // Coil Image Loading
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation(Dependencies.CoilCompose)
 
     //Paging
-    implementation("androidx.paging:paging-compose:3.2.1")
+    implementation(Dependencies.PagingCompose)
 
     // Test
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    testImplementation("org.robolectric:robolectric:4.10.3")
-    debugImplementation("androidx.test:core:1.5.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    testImplementation("io.mockk:mockk:1.13.3")
-    androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    testImplementation("app.cash.turbine:turbine:1.0.0")
-    testImplementation("com.google.truth:truth:1.1.4")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
+    androidTestImplementation(Dependencies.EspressoCore)
+    testImplementation(Dependencies.Junit)
+    androidTestImplementation(Dependencies.ExtJunit)
+    testImplementation(Dependencies.CoreTesting)
+    testImplementation(Dependencies.Robolectric)
+    debugImplementation(Dependencies.TestCore)
+    testImplementation(Dependencies.KotlinxCoroutinesTest)
+    testImplementation(Dependencies.MockitoKotlin)
+    testImplementation(Dependencies.Mockk)
+    androidTestImplementation(Dependencies.TestRules)
+    androidTestImplementation(Dependencies.UiTestJunit4)
+    debugImplementation(Dependencies.UiTestManifest)
+    testImplementation(Dependencies.Turbine)
+    testImplementation(Dependencies.Truth)
+    testImplementation(Dependencies.MockWebserver)
 }
