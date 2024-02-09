@@ -1,6 +1,7 @@
 package com.example.pixabay.ui.screen.splash
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -20,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pixabay.R
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.textSp
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun SplashScreen(
@@ -28,8 +32,17 @@ internal fun SplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.primary),
     ) {
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            painter = painterResource(id = R.drawable.pixabay_logo),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+        )
+
         Text(
             modifier = Modifier
                 .fillMaxWidth()
@@ -44,7 +57,7 @@ internal fun SplashScreen(
         )
     }
     LaunchedEffect(Unit) {
-        //delay(2000)
+        delay(1500)
         navigateToSearchScreen()
     }
 }
