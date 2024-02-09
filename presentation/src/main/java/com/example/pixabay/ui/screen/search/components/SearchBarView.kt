@@ -27,9 +27,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.pixabay.R
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.PresentationConstants
 
@@ -40,19 +42,20 @@ internal fun SearchBarView(
 ) {
     var query by remember { mutableStateOf(PresentationConstants.DEFAULT_SEARCH_QUERY) }
     val keyboardController = LocalSoftwareKeyboardController.current
+    val queryMaxLength = 25
 
     Column {
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(dimensionResource(id = R.dimen.padding_small)),
             shape = CircleShape,
             placeholder = {
-                Text(text = "Search")
+                Text(text = stringResource(R.string.search))
             },
             value = query,
             onValueChange = {
-                if (it.length <= 20) {
+                if (it.length <= queryMaxLength) {
                     query = it
                 }
             },

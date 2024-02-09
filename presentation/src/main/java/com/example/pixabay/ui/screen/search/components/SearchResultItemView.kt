@@ -23,12 +23,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.CoilImage
 import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.ui.theme.PixabayTheme
+import com.example.pixabay.util.textSp
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -41,13 +40,10 @@ internal fun SearchResultItemView(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
-            .padding(
-                vertical = dimensionResource(id = R.dimen.padding_x_small),
-                horizontal = dimensionResource(id = R.dimen.padding_small)
-            ),
+            .height(dimensionResource(id = R.dimen.image_item_height))
+            .padding(dimensionResource(id = R.dimen.padding_x_small)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)),
-        elevation = 6.dp,
+        elevation = dimensionResource(id = R.dimen.card_elevation),
         onClick = onItemClick,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -68,7 +64,7 @@ internal fun SearchResultItemView(
                     text = username,
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_default).textSp,
                     color = MaterialTheme.colorScheme.surface
                 )
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_2x_small)))
@@ -82,7 +78,7 @@ internal fun SearchResultItemView(
                     text = tags,
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 14.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
                     color = GreenLight
                 )
             }

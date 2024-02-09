@@ -12,10 +12,11 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.pixabay.R
+import com.example.pixabay.util.textSp
 
 @Composable
 fun EmptyView(
@@ -28,18 +29,20 @@ fun EmptyView(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(
+                horizontal = dimensionResource(id = R.dimen.padding_standard)
+            ),
             text = message,
             textAlign = TextAlign.Center,
-            lineHeight = 20.sp
+            lineHeight = dimensionResource(id = R.dimen.line_height).textSp
         )
 
         Icon(
             imageVector = Icons.Filled.Face,
             contentDescription = null,
             modifier = Modifier
-                .size(40.dp)
-                .padding(top = 16.dp),
+                .size(dimensionResource(id = R.dimen.icon_size_x_large))
+                .padding(top = dimensionResource(id = R.dimen.padding_standard)),
         )
     }
 }

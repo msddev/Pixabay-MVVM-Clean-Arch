@@ -30,13 +30,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.R
 import com.example.pixabay.model.ImagePresentationModel
 import com.example.pixabay.ui.commonComponent.CoilImage
+import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.ui.theme.PixabayTheme
+import com.example.pixabay.util.textSp
 
 @Composable
 internal fun ImageDetailBody(
@@ -55,8 +54,8 @@ internal fun ImageDetailBody(
 
         FloatingActionButton(
             modifier = Modifier
-                .padding(16.dp)
-                .size(size = 42.dp)
+                .padding(dimensionResource(id = R.dimen.padding_standard))
+                .size(dimensionResource(id = R.dimen.icon_size_x_large))
                 .align(Alignment.TopStart),
             onClick = onBackClick,
             backgroundColor = MaterialTheme.colorScheme.background,
@@ -83,12 +82,12 @@ internal fun ImageDetailBody(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp),
+                    .padding(top = dimensionResource(id = R.dimen.padding_small)),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size_standard)),
                     painter = painterResource(id = R.drawable.baseline_favorite_24),
                     tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
@@ -96,18 +95,18 @@ internal fun ImageDetailBody(
                 Text(
                     modifier = Modifier
                         .wrapContentWidth()
-                        .padding(start = 4.dp),
+                        .padding(start = dimensionResource(id = R.dimen.padding_x_small)),
                     text = imageDetail.likes.toString(),
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 15.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
                     color = MaterialTheme.colorScheme.surface
                 )
 
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_standard)))
 
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size_standard)),
                     painter = painterResource(id = R.drawable.baseline_comment_24),
                     tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
@@ -115,18 +114,18 @@ internal fun ImageDetailBody(
                 Text(
                     modifier = Modifier
                         .wrapContentWidth()
-                        .padding(start = 4.dp),
+                        .padding(start = dimensionResource(id = R.dimen.padding_x_small)),
                     text = imageDetail.comments.toString(),
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 15.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
                     color = MaterialTheme.colorScheme.surface
                 )
 
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_standard)))
 
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.icon_size_standard)),
                     painter = painterResource(id = R.drawable.baseline_cloud_download_24),
                     tint = MaterialTheme.colorScheme.background,
                     contentDescription = null
@@ -134,11 +133,11 @@ internal fun ImageDetailBody(
                 Text(
                     modifier = Modifier
                         .wrapContentWidth()
-                        .padding(start = 4.dp),
+                        .padding(start = dimensionResource(id = R.dimen.padding_x_small)),
                     text = imageDetail.downloads.toString(),
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 15.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
                     color = MaterialTheme.colorScheme.surface
                 )
             }
@@ -148,7 +147,7 @@ internal fun ImageDetailBody(
                 text = imageDetail.user,
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                fontSize = dimensionResource(id = R.dimen.text_size_x_large).textSp,
                 color = MaterialTheme.colorScheme.surface
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_x_small)))
@@ -157,7 +156,7 @@ internal fun ImageDetailBody(
                 text = imageDetail.tags,
                 maxLines = 1,
                 fontWeight = FontWeight.Normal,
-                fontSize = 14.sp,
+                fontSize = dimensionResource(id = R.dimen.text_size_default).textSp,
                 color = GreenLight
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))

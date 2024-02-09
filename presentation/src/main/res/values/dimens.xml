@@ -2,6 +2,7 @@
 <resources>
     <dimen name="button_corner_radius">8dp</dimen>
     <dimen name="dialog_base_corner_radius_medium">8dp</dimen>
+    <dimen name="image_item_height">180dp</dimen>
 
     <dimen name="padding_2x_small">2dp</dimen>
     <dimen name="padding_x_small">6dp</dimen>
@@ -23,4 +24,16 @@
     <dimen name="corner_radius_x_small">6dp</dimen>
     <dimen name="corner_radius_small">8dp</dimen>
     <dimen name="corner_radius_large">12dp</dimen>
+    <dimen name="corner_radius_x_large">16dp</dimen>
+
+    <dimen name="line_height">20dp</dimen>
+
+    <dimen name="icon_size_x_large">48dp</dimen>
+    <dimen name="icon_size_large">36dp</dimen>
+    <dimen name="icon_size_standard">24dp</dimen>
+    <dimen name="icon_size_medium">20dp</dimen>
+    <dimen name="icon_size_small">16dp</dimen>
+    <dimen name="icon_size_x_small">12dp</dimen>
+
+    <dimen name="card_elevation">6dp</dimen>
 </resources>

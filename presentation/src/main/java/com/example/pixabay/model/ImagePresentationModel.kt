@@ -1,6 +1,5 @@
 package com.example.pixabay.model
 
-
 data class ImagePresentationModel(
     val id: Int = 0,
     val userId: Int = 0,

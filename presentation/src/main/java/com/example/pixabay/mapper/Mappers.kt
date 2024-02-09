@@ -3,7 +3,6 @@ package com.example.pixabay.mapper
 import com.example.domain.model.ImageDomainModel
 import com.example.pixabay.model.ImagePresentationModel
 
-
 fun ImageDomainModel.toImagePresentation(): ImagePresentationModel {
     return ImagePresentationModel(
         id = id,

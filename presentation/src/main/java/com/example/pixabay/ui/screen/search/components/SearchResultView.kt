@@ -1,7 +1,6 @@
 package com.example.pixabay.ui.screen.search.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,15 +12,13 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.LoadStates
 import androidx.paging.PagingData
@@ -34,6 +31,7 @@ import com.example.pixabay.ui.commonComponent.error.RetryColumn
 import com.example.pixabay.ui.commonComponent.loading.LoadingColumn
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.fadingEdge
+import com.example.pixabay.util.textSp
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -45,13 +43,13 @@ fun SearchResultView(
     val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.01f to Color.Red)
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
-            .fadingEdge(topFade).size(8.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .fadingEdge(topFade)
+            .size(dimensionResource(id = R.dimen.padding_small)),
         state = listState
     ) {
-        items(
-            count = imagesPaging.itemCount,
-        ) { index ->
+        items(count = imagesPaging.itemCount) { index ->
             imagesPaging[index]?.let { item ->
                 SearchResultItemView(
                     thumbnail = item.previewImageURL,
@@ -67,14 +65,12 @@ fun SearchResultView(
         when (imagesPaging.loadState.append) {
             is LoadState.Loading -> {
                 item {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(8.dp),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(dimensionResource(id = R.dimen.padding_small)),
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
 
@@ -83,10 +79,10 @@ fun SearchResultView(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
+                            .padding(dimensionResource(id = R.dimen.padding_small)),
                         text = stringResource(id = R.string.error_paging_images),
                         textAlign = TextAlign.Center,
-                        lineHeight = 20.sp
+                        lineHeight = dimensionResource(id = R.dimen.text_size_large).textSp
                     )
                 }
             }

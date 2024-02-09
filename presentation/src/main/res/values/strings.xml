@@ -5,7 +5,12 @@
     <string name="loading">Loading…</string>
     <string name="no_result">Your search didn\'t bring up any result</string>
     <string name="error_loading_images">There was an error loading the images,\nplease check your internet and try again</string>
-    <string name="error_paging_images">There is a problem!</string>
+    <string name="error_paging_images">Not loading more page!</string>
     <string name="fetching_image_detail">Fetching Movie Detail…</string>
+    <string name="retry">Retry</string>
+    <string name="are_you_sure_you_want_to_see_more_details">Are you sure you want to see more details?</string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="search">Search</string>
 
 </resources>
