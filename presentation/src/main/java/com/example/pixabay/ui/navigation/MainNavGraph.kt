@@ -1,7 +1,9 @@
 package com.example.pixabay.ui.navigation
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -47,13 +49,20 @@ private fun addSearchScreen(
     navGraphBuilder: NavGraphBuilder,
 ) {
     navGraphBuilder.composable(route = MainNavRoute.Search.path) {
-        BackHandler(true) {}
+        val activity = (LocalContext.current as? Activity)
+
+        BackHandler(true) {
+            activity?.finish()
+        }
 
         SearchScreen(
             navigateToDetailScreen = { imageId ->
                 navController.navigate(
                     MainNavRoute.Detail.withArgs(imageId)
                 )
+            },
+            onBackClick = {
+                activity?.finish()
             }
         )
     }
