@@ -57,7 +57,7 @@ object Dependencies {
 
 object Versions {
     const val ActivityCompose = "1.8.2"
-    const val ComposeMaterial3 = "1.1.2"
+    const val ComposeMaterial3 = "1.2.0"
     const val ComposeMaterial = "1.6.0"
     const val ComposeBom = "2023.03.00"
     const val ComposeRuntimeLivedata = "1.6.0"

@@ -2,17 +2,18 @@ package com.example.pixabay.ui.screen.splash
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -30,9 +31,7 @@ internal fun SplashScreen(
     navigateToSearchScreen: () -> Unit,
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary),
+        modifier = Modifier.fillMaxSize(),
     ) {
         Image(
             modifier = Modifier
@@ -41,6 +40,7 @@ internal fun SplashScreen(
             painter = painterResource(id = R.drawable.pixabay_logo),
             contentDescription = null,
             contentScale = ContentScale.Fit,
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onBackground)
         )
 
         Text(
@@ -53,7 +53,6 @@ internal fun SplashScreen(
             fontWeight = FontWeight.Bold,
             maxLines = 1,
             fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
-            color = MaterialTheme.colorScheme.surface,
         )
     }
     LaunchedEffect(Unit) {
@@ -67,10 +66,12 @@ internal fun SplashScreen(
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SplashScreen(
-            navigateToSearchScreen = {
+        Surface {
+            SplashScreen(
+                navigateToSearchScreen = {
 
-            }
-        )
+                }
+            )
+        }
     }
 }

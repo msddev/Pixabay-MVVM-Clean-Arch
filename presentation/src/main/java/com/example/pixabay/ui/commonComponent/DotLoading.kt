@@ -1,5 +1,6 @@
 package com.example.pixabay.ui.commonComponent
 
+import android.content.res.Configuration
 import androidx.compose.animation.core.InfiniteTransition
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
@@ -15,7 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.pixabay.R
+import com.example.pixabay.ui.theme.PixabayTheme
 
 @Composable
 fun DotsLoading(
@@ -105,10 +107,13 @@ private fun animateScaleWithDelay(
     label = stringResource(id = R.string.app_name),
 )
 
-@Preview(showBackground = true, backgroundColor = 0xFF000000)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun DotsPreview() = MaterialTheme {
-    Column(modifier = Modifier.padding(4.dp)) {
-        DotsLoading()
+fun DotsPreview() = PixabayTheme {
+    Surface {
+        Column(modifier = Modifier.padding(4.dp)) {
+            DotsLoading()
+        }
     }
 }

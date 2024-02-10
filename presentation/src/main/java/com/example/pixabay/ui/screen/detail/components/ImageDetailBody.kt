@@ -16,12 +16,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pixabay.R
 import com.example.pixabay.model.ImagePresentationModel
 import com.example.pixabay.ui.commonComponent.CoilImage
-import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.textSp
 
@@ -58,7 +58,6 @@ internal fun ImageDetailBody(
                 .size(dimensionResource(id = R.dimen.icon_size_x_large))
                 .align(Alignment.TopStart),
             onClick = onBackClick,
-            backgroundColor = MaterialTheme.colorScheme.background,
             shape = CircleShape,
         ) {
             Icon(
@@ -157,7 +156,7 @@ internal fun ImageDetailBody(
                 maxLines = 1,
                 fontWeight = FontWeight.Normal,
                 fontSize = dimensionResource(id = R.dimen.text_size_default).textSp,
-                color = GreenLight
+                color = MaterialTheme.colorScheme.surface
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
         }
@@ -169,15 +168,17 @@ internal fun ImageDetailBody(
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        ImageDetailBody(
-            imageDetail = ImagePresentationModel(
-                user = "Masoud",
-                tags = "Test, Test",
-                likes = 120,
-                downloads = 140,
-                comments = 160
-            ),
-            onBackClick = {}
-        )
+        Surface {
+            ImageDetailBody(
+                imageDetail = ImagePresentationModel(
+                    user = "Masoud",
+                    tags = "Test, Test",
+                    likes = 120,
+                    downloads = 140,
+                    comments = 160
+                ),
+                onBackClick = {}
+            )
+        }
     }
 }

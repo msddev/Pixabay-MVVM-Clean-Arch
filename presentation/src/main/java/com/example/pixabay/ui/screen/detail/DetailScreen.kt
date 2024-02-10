@@ -34,7 +34,7 @@ internal fun DetailScreen(
         is DetailUiState.Error -> {
             RetryColumn(
                 message = uiState.message,
-                onRetry = {
+                onRetryClick = {
                     detailViewModel.getImage(imageId)
                 }
             )

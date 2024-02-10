@@ -8,13 +8,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -94,7 +95,10 @@ internal fun SearchBarView(
                 cursorColor = Color.Gray,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-                selectionColors = TextSelectionColors(colors.onPrimary, colors.onSecondary),
+                selectionColors = TextSelectionColors(
+                    MaterialTheme.colorScheme.onPrimary,
+                    MaterialTheme.colorScheme.onSecondary
+                ),
             )
 
         )
@@ -115,9 +119,11 @@ private fun getIcon(query: String): ImageVector {
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchBarView(
-            onSearchClick = {},
-            onBackClick = {}
-        )
+        Surface {
+            SearchBarView(
+                onSearchClick = {},
+                onBackClick = {}
+            )
+        }
     }
 }

@@ -6,16 +6,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,11 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pixabay.R
 import com.example.pixabay.ui.commonComponent.CoilImage
-import com.example.pixabay.ui.theme.GreenLight
 import com.example.pixabay.ui.theme.PixabayTheme
 import com.example.pixabay.util.textSp
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun SearchResultItemView(
     thumbnail: String,
@@ -43,7 +42,9 @@ internal fun SearchResultItemView(
             .height(dimensionResource(id = R.dimen.image_item_height))
             .padding(dimensionResource(id = R.dimen.padding_x_small)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)),
-        elevation = dimensionResource(id = R.dimen.card_elevation),
+        elevation = CardDefaults.cardElevation(
+            dimensionResource(id = R.dimen.card_elevation),
+        ),
         onClick = onItemClick,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -67,7 +68,6 @@ internal fun SearchResultItemView(
                     fontSize = dimensionResource(id = R.dimen.text_size_default).textSp,
                     color = MaterialTheme.colorScheme.surface
                 )
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_2x_small)))
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -79,7 +79,7 @@ internal fun SearchResultItemView(
                     maxLines = 1,
                     fontWeight = FontWeight.Normal,
                     fontSize = dimensionResource(id = R.dimen.text_size_medium).textSp,
-                    color = GreenLight
+                    color = MaterialTheme.colorScheme.surface
                 )
             }
         }
@@ -91,13 +91,15 @@ internal fun SearchResultItemView(
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchResultItemView(
-            thumbnail = "",
-            username = "Masoud",
-            tags = "Test, Test",
-            onItemClick = {
+        Surface {
+            SearchResultItemView(
+                thumbnail = "",
+                username = "Masoud",
+                tags = "Test, Test",
+                onItemClick = {
 
-            }
-        )
+                }
+            )
+        }
     }
 }

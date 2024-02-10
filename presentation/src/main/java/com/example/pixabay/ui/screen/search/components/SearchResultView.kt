@@ -10,9 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -109,7 +110,7 @@ fun SearchResultView(
             is LoadState.Error -> {
                 RetryColumn(
                     message = stringResource(id = R.string.error_loading_images),
-                    onRetry = {
+                    onRetryClick = {
                         imagesPaging.refresh()
                     }
                 )
@@ -132,20 +133,22 @@ fun SearchResultView(
 @Composable
 private fun ScreenPreview() {
     PixabayTheme {
-        SearchResultView(
-            parentPadding = PaddingValues(8.dp),
-            imagesPaging = flowOf(
-                PagingData.from(
-                    listOf(ImagePresentationModel()),
-                    sourceLoadStates =
-                    LoadStates(
-                        refresh = LoadState.NotLoading(true),
-                        append = LoadState.NotLoading(true),
-                        prepend = LoadState.NotLoading(true),
+        Surface {
+            SearchResultView(
+                parentPadding = PaddingValues(8.dp),
+                imagesPaging = flowOf(
+                    PagingData.from(
+                        listOf(ImagePresentationModel()),
+                        sourceLoadStates =
+                        LoadStates(
+                            refresh = LoadState.NotLoading(true),
+                            append = LoadState.NotLoading(true),
+                            prepend = LoadState.NotLoading(true),
+                        )
                     )
-                )
-            ).collectAsLazyPagingItems(),
-            onItemClick = {}
-        )
+                ).collectAsLazyPagingItems(),
+                onItemClick = {}
+            )
+        }
     }
 }
