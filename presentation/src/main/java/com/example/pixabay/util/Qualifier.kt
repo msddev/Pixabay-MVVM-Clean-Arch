@@ -1,5 +1,3 @@
-@file:Suppress("MatchingDeclarationName", "Filename")
-
 package com.example.pixabay.util
 
 import javax.inject.Qualifier

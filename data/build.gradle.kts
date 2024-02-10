@@ -38,6 +38,10 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -62,4 +66,12 @@ dependencies {
 
     // Test
     testImplementation(Dependencies.Junit)
+    testImplementation(Dependencies.CoreTesting)
+    testImplementation(Dependencies.KotlinxCoroutinesTest)
+    testImplementation(Dependencies.Mockk)
+    testImplementation(Dependencies.MockitoKotlin)
+    testImplementation(Dependencies.Turbine)
+    testImplementation(Dependencies.Truth)
+    testImplementation(Dependencies.Robolectric)
+    testImplementation(Dependencies.TestCore)
 }

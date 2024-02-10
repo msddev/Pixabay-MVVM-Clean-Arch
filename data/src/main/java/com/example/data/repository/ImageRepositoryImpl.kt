@@ -4,14 +4,14 @@ import com.example.data.dataSource.local.dao.ImageDao
 import com.example.data.mapper.toDomainImage
 import com.example.data.util.handleException
 import com.example.domain.model.ImageDomainModel
-import com.example.domain.repository.GetImageRepository
+import com.example.domain.repository.ImageRepository
 import com.example.domain.unit.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetImageRepositoryImpl(
+class ImageRepositoryImpl(
     private val imageDao: ImageDao,
-) : GetImageRepository {
+) : ImageRepository {
     override fun getImage(imageId: String): Flow<Resource<ImageDomainModel>> = flow {
         emit(Resource.Loading())
         try {

@@ -3,9 +3,9 @@ package com.example.pixabay.di
 import com.example.data.dataSource.local.dao.ImageDao
 import com.example.data.dataSource.local.dao.RemoteKeyDao
 import com.example.data.dataSource.remote.api.ImageApi
-import com.example.data.repository.GetImageRepositoryImpl
+import com.example.data.repository.ImageRepositoryImpl
 import com.example.data.repository.SearchImageRepositoryImpl
-import com.example.domain.repository.GetImageRepository
+import com.example.domain.repository.ImageRepository
 import com.example.domain.repository.SearchImageRepository
 import com.example.domain.usecase.GetImageUseCase
 import com.example.domain.usecase.SearchImageUseCase
@@ -25,7 +25,7 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideGetImageUseCase(getImageRepository: GetImageRepository) =
+    fun provideGetImageUseCase(getImageRepository: ImageRepository) =
         GetImageUseCase(getImageRepository)
 
     @Provides
@@ -42,9 +42,9 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideGetImageRepository(
+    fun provideImageRepository(
         imageDao: ImageDao,
-    ): GetImageRepository = GetImageRepositoryImpl(
+    ): ImageRepository = ImageRepositoryImpl(
         imageDao = imageDao,
     )
 }
