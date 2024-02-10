@@ -9,7 +9,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [21], manifest = Config.NONE)
+@Config(sdk = [24], manifest = Config.NONE)
 abstract class LocalPixabayRoomDatabase {
     lateinit var database: PixabayRoomDatabase
 
@@ -18,7 +18,7 @@ abstract class LocalPixabayRoomDatabase {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             PixabayRoomDatabase::class.java
-        ).build()
+        ).allowMainThreadQueries().build()
     }
 
     @After

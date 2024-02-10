@@ -38,10 +38,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-
-    testOptions {
-        unitTests.isIncludeAndroidResources = true
-    }
 }
 
 dependencies {
@@ -74,4 +70,5 @@ dependencies {
     testImplementation(Dependencies.Truth)
     testImplementation(Dependencies.Robolectric)
     testImplementation(Dependencies.TestCore)
+    testImplementation(Dependencies.MockWebserver)
 }
