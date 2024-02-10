@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -29,7 +30,7 @@ internal fun SearchScreen(
     var showDetailAlertDialog by remember { mutableStateOf(false) }
     var imageId by remember { mutableStateOf("") }
 
-    var showSearchView by remember { mutableStateOf(false) }
+    var showSearchView by rememberSaveable { mutableStateOf(false) }
 
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
