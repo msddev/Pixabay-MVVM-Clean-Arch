@@ -1,6 +1,10 @@
 package com.example.pixabay.ui.screen.search.components
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -38,6 +42,7 @@ import com.example.pixabay.util.PresentationConstants
 
 @Composable
 internal fun SearchBarView(
+    visibility: Boolean,
     onSearchClick: (query: String) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -45,63 +50,69 @@ internal fun SearchBarView(
     val keyboardController = LocalSoftwareKeyboardController.current
     val queryMaxLength = 25
 
-    Column {
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(dimensionResource(id = R.dimen.padding_small)),
-            shape = CircleShape,
-            placeholder = {
-                Text(text = stringResource(R.string.search))
-            },
-            value = query,
-            onValueChange = {
-                if (it.length <= queryMaxLength) {
-                    query = it
-                }
-            },
-            leadingIcon = {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.Filled.Search,
-                        contentDescription = null
-                    )
-                }
-            },
-            trailingIcon = {
-                IconButton(
-                    onClick = {
-                        if (query.isEmpty()) {
-                            onBackClick.invoke()
-                        } else {
-                            query = ""
-                        }
+    AnimatedVisibility(
+        visible = visibility,
+        enter = fadeIn(animationSpec = tween(400)),
+        exit = fadeOut(animationSpec = tween(400)),
+    ) {
+        Column {
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_x_small)),
+                shape = CircleShape,
+                placeholder = {
+                    Text(text = stringResource(R.string.search))
+                },
+                value = query,
+                onValueChange = {
+                    if (it.length <= queryMaxLength) {
+                        query = it
                     }
-                ) {
-                    Icon(
-                        imageVector = getIcon(query),
-                        contentDescription = null
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = {
-                keyboardController?.hide()
-                onSearchClick.invoke(query)
-            }),
-            singleLine = true,
-            maxLines = 1,
-            colors = TextFieldDefaults.colors(
-                cursorColor = Color.Gray,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                selectionColors = TextSelectionColors(
-                    MaterialTheme.colorScheme.onPrimary,
-                    MaterialTheme.colorScheme.onSecondary
-                ),
-            )
+                },
+                leadingIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.Filled.Search,
+                            contentDescription = null
+                        )
+                    }
+                },
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            if (query.isEmpty()) {
+                                onBackClick.invoke()
+                            } else {
+                                query = ""
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = getIcon(query),
+                            contentDescription = null
+                        )
+                    }
+                },
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(onSearch = {
+                    keyboardController?.hide()
+                    onSearchClick.invoke(query)
+                }),
+                singleLine = true,
+                maxLines = 1,
+                colors = TextFieldDefaults.colors(
+                    cursorColor = Color.Gray,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    selectionColors = TextSelectionColors(
+                        MaterialTheme.colorScheme.onPrimary,
+                        MaterialTheme.colorScheme.onSecondary
+                    ),
+                )
 
-        )
+            )
+        }
     }
 }
 
@@ -121,6 +132,7 @@ private fun ScreenPreview() {
     PixabayTheme {
         Surface {
             SearchBarView(
+                visibility = true,
                 onSearchClick = {},
                 onBackClick = {}
             )

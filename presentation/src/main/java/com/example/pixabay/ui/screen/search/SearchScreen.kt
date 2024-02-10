@@ -14,8 +14,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.pixabay.ui.screen.search.components.DetailAlertDialog
+import com.example.pixabay.ui.screen.search.components.SearchBarView
 import com.example.pixabay.ui.screen.search.components.SearchResultView
-import com.example.pixabay.ui.screen.search.components.SearchTopAppBarView
+import com.example.pixabay.ui.screen.search.components.TopAppBarView
 
 @Composable
 internal fun SearchScreen(
@@ -28,6 +29,8 @@ internal fun SearchScreen(
     var showDetailAlertDialog by remember { mutableStateOf(false) }
     var imageId by remember { mutableStateOf("") }
 
+    var showSearchView by remember { mutableStateOf(false) }
+
     val keyboardController = LocalSoftwareKeyboardController.current
     keyboardController?.hide()
 
@@ -36,10 +39,19 @@ internal fun SearchScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         topBar = {
-            SearchTopAppBarView(
+            SearchBarView(
+                visibility = showSearchView,
+                onSearchClick = searchViewModel::onSearch,
+                onBackClick = {
+                    showSearchView = false
+                }
+            )
+
+            TopAppBarView(
+                visibility = showSearchView.not(),
                 isDarkMode = false,
                 onSearchClick = {
-
+                    showSearchView = true
                 },
                 onThemeClick = onUpdateTheme
             )
