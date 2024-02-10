@@ -15,17 +15,30 @@ import com.example.pixabay.ui.screen.search.SearchScreen
 import com.example.pixabay.ui.screen.splash.SplashScreen
 
 @Composable
-fun MainNavGraph(navController: NavHostController) {
+fun MainNavGraph(
+    navController: NavHostController,
+    onUpdateTheme: () -> Unit
+) {
 
     NavHost(
         navController = navController,
         startDestination = MainNavRoute.Splash.path
     ) {
-        addSplashScreen(navController, this)
+        addSplashScreen(
+            navController = navController,
+            navGraphBuilder = this
+        )
 
-        addSearchScreen(navController, this)
+        addSearchScreen(
+            navController = navController,
+            navGraphBuilder = this,
+            onUpdateTheme = onUpdateTheme
+        )
 
-        addDetailScreen(navController, this)
+        addDetailScreen(
+            navController = navController,
+            navGraphBuilder = this
+        )
     }
 }
 
@@ -47,6 +60,7 @@ private fun addSplashScreen(
 private fun addSearchScreen(
     navController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
+    onUpdateTheme: () -> Unit,
 ) {
     navGraphBuilder.composable(route = MainNavRoute.Search.path) {
         val activity = (LocalContext.current as? Activity)
@@ -61,9 +75,7 @@ private fun addSearchScreen(
                     MainNavRoute.Detail.withArgs(imageId)
                 )
             },
-            onBackClick = {
-                activity?.finish()
-            }
+            onUpdateTheme = onUpdateTheme,
         )
     }
 }

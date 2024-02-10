@@ -1,9 +1,7 @@
 package com.example.pixabay.ui.screen.search
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -16,14 +14,14 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.pixabay.ui.screen.search.components.DetailAlertDialog
-import com.example.pixabay.ui.screen.search.components.SearchBarView
 import com.example.pixabay.ui.screen.search.components.SearchResultView
+import com.example.pixabay.ui.screen.search.components.SearchTopAppBarView
 
 @Composable
 internal fun SearchScreen(
     searchViewModel: SearchViewModel = hiltViewModel(),
     navigateToDetailScreen: (String) -> Unit,
-    onBackClick: () -> Unit,
+    onUpdateTheme: () -> Unit,
 ) {
     val imagesPaging = searchViewModel.imagesPaging.collectAsLazyPagingItems()
 
@@ -38,23 +36,23 @@ internal fun SearchScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         topBar = {
-            SearchBarView(
-                onSearchClick = searchViewModel::onSearch,
-                onBackClick = onBackClick
+            SearchTopAppBarView(
+                isDarkMode = false,
+                onSearchClick = {
+
+                },
+                onThemeClick = onUpdateTheme
             )
         }
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize().padding(it)
-        ) {
-            SearchResultView(
-                imagesPaging = imagesPaging,
-                onItemClick = { id ->
-                    imageId = id
-                    showDetailAlertDialog = true
-                }
-            )
-        }
+    ) { padding ->
+        SearchResultView(
+            parentPadding = padding,
+            imagesPaging = imagesPaging,
+            onItemClick = { id ->
+                imageId = id
+                showDetailAlertDialog = true
+            }
+        )
     }
 
     DetailAlertDialog(

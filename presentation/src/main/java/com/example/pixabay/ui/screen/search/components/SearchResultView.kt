@@ -1,6 +1,8 @@
 package com.example.pixabay.ui.screen.search.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.LoadStates
 import androidx.paging.PagingData
@@ -36,82 +39,89 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchResultView(
+    parentPadding: PaddingValues,
     imagesPaging: LazyPagingItems<ImagePresentationModel>,
     onItemClick: (item: String) -> Unit,
 ) {
     val listState: LazyListState = rememberLazyListState()
     val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.01f to Color.White)
 
-    LazyColumn(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .fadingEdge(topFade)
-            .size(dimensionResource(id = R.dimen.padding_small)),
-        state = listState
+            .padding(parentPadding)
     ) {
-        items(count = imagesPaging.itemCount) { index ->
-            imagesPaging[index]?.let { item ->
-                SearchResultItemView(
-                    thumbnail = item.previewImageURL,
-                    username = item.user,
-                    tags = item.tags,
-                    onItemClick = {
-                        onItemClick.invoke(item.id.toString())
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .fadingEdge(topFade)
+                .size(dimensionResource(id = R.dimen.padding_small)),
+            state = listState
+        ) {
+            items(count = imagesPaging.itemCount) { index ->
+                imagesPaging[index]?.let { item ->
+                    SearchResultItemView(
+                        thumbnail = item.previewImageURL,
+                        username = item.user,
+                        tags = item.tags,
+                        onItemClick = {
+                            onItemClick.invoke(item.id.toString())
+                        }
+                    )
+                }
+            }
+
+            when (imagesPaging.loadState.append) {
+                is LoadState.Loading -> {
+                    item {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(dimensionResource(id = R.dimen.padding_small)),
+                            color = MaterialTheme.colorScheme.primary
+                        )
                     }
-                )
+                }
+
+                is LoadState.Error -> {
+                    item {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(dimensionResource(id = R.dimen.padding_small)),
+                            text = stringResource(id = R.string.error_paging_images),
+                            textAlign = TextAlign.Center,
+                            lineHeight = dimensionResource(id = R.dimen.text_size_large).textSp
+                        )
+                    }
+                }
+
+                is LoadState.NotLoading -> {
+                }
             }
         }
 
-        when (imagesPaging.loadState.append) {
+        when (imagesPaging.loadState.refresh) {
             is LoadState.Loading -> {
-                item {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(dimensionResource(id = R.dimen.padding_small)),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
+                LoadingColumn(title = stringResource(id = R.string.searching_image))
             }
 
             is LoadState.Error -> {
-                item {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(dimensionResource(id = R.dimen.padding_small)),
-                        text = stringResource(id = R.string.error_paging_images),
-                        textAlign = TextAlign.Center,
-                        lineHeight = dimensionResource(id = R.dimen.text_size_large).textSp
-                    )
-                }
+                RetryColumn(
+                    message = stringResource(id = R.string.error_loading_images),
+                    onRetry = {
+                        imagesPaging.refresh()
+                    }
+                )
             }
 
             is LoadState.NotLoading -> {
-            }
-        }
-    }
-
-    when (imagesPaging.loadState.refresh) {
-        is LoadState.Loading -> {
-            LoadingColumn(title = stringResource(id = R.string.searching_image))
-        }
-
-        is LoadState.Error -> {
-            RetryColumn(
-                message = stringResource(id = R.string.error_loading_images),
-                onRetry = {
-                    imagesPaging.refresh()
+                if (
+                    imagesPaging.itemCount == 0 &&
+                    imagesPaging.loadState.source.refresh != LoadState.Loading
+                ) {
+                    EmptyView(message = stringResource(id = R.string.no_result))
                 }
-            )
-        }
-
-        is LoadState.NotLoading -> {
-            if (
-                imagesPaging.itemCount == 0 &&
-                imagesPaging.loadState.source.refresh != LoadState.Loading
-            ) {
-                EmptyView(message = stringResource(id = R.string.no_result))
             }
         }
     }
@@ -123,6 +133,7 @@ fun SearchResultView(
 private fun ScreenPreview() {
     PixabayTheme {
         SearchResultView(
+            parentPadding = PaddingValues(8.dp),
             imagesPaging = flowOf(
                 PagingData.from(
                     listOf(ImagePresentationModel()),
