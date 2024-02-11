@@ -1,8 +1,10 @@
+### PayBack Technical Test
+
 This project is a technical test that showcases a modern Android application development using Kotlin and the latest tech stack.
 
-The app uses the [Pixabay](https://pixabay.com/api/docs/#api_search_images) API service to display the image list based on the search result. It follows the Clean Architecture principles, the Repository Pattern, and the MVVM Architecture. It also uses Jetpack Compose UI toolkit in the presentation layer.
+The app uses the [Pixabay](https://pixabay.com/api/docs/#api_search_images) API service to display the image list based on the search query. It follows the Clean Architecture principles, the Repository Pattern, and the MVVM Architecture. It also uses Jetpack Compose UI toolkit in the presentation layer.
 
-You can download APK file from [this link](https://github.com/msddev/PayBack-Technical-Test/releases/download/v1.0.0/Pixabay-Test.apk)
+You can download APK file from [this link](https://github.com/msddev/PayBack-Technical-Test/releases/download/v1.0.0/Pixabay-Test.apk).
 
 ## Features
 
