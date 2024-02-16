@@ -1,4 +1,4 @@
-### Technical Test
+### Pixabay Technical Test
 
 This project is a technical test that showcases a modern Android application development using Kotlin and the latest tech stack.
 
